@@ -161,7 +161,9 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 
         //---
-        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
+        // Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+        // Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
 
         /*
          * Package Service Providers...
