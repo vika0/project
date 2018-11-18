@@ -21,8 +21,7 @@ return [
     |
     */
 
-    // 'secret' => env('JWT_SECRET', 'U3HBfohafdh88VMP6djtmK5wuM6Q6MCB'),
-    'secret' => env('JWT_SECRET'),
+    'secret' => env('JWT_SECRET', 'changeme'),
 
     /*
     |--------------------------------------------------------------------------
@@ -144,8 +143,8 @@ return [
         | Specify the provider that is used to create and decode the tokens.
         |
         */
-        'jwt' => 'Tymon\JWTAuth\Providers\JWT\Namshi',
-        // 'jwt' => 'Tymon\JWTAuth\Providers\JWT\NamshiAdapter',
+
+        'jwt' => 'Tymon\JWTAuth\Providers\JWT\NamshiAdapter',
 
         /*
         |--------------------------------------------------------------------------
@@ -156,8 +155,7 @@ return [
         |
         */
 
-        // 'auth' => 'Tymon\JWTAuth\Providers\Auth\IlluminateAuthAdapter',
-        'auth' => 'Tymon\JWTAuth\Providers\Auth\Illuminate',
+        'auth' => 'Tymon\JWTAuth\Providers\Auth\IlluminateAuthAdapter',
 
         /*
         |--------------------------------------------------------------------------
@@ -168,8 +166,7 @@ return [
         |
         */
 
-        // 'storage' => 'Tymon\JWTAuth\Providers\Storage\IlluminateCacheAdapter',
-        'storage' => 'Tymon\JWTAuth\Providers\Storage\Illuminate',
+        'storage' => 'Tymon\JWTAuth\Providers\Storage\IlluminateCacheAdapter',
 
     ],
 
