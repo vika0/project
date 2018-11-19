@@ -44,8 +44,64 @@ class Handler extends ExceptionHandler
      * @param  \Exception  $exception
      * @return \Illuminate\Http\Response
      */
-    public function render($request, Exception $exception)
+    public function render($request, Exception $e)
     {
-        return parent::render($request, $exception);
+
+        if($e instanceof HttpException && $e->getStatusCode()== 404)
+        {
+            return response()->json(['message' => 'Not Found!'], 404);
+        }
+        elseif($e instanceof HttpException && $e->getStatusCode()== 405)
+        {
+            return response()->json(['message' => '405!'], 405);
+        }
+        elseif($e instanceof HttpException && $e->getStatusCode()== 401)
+        {
+            return response()->json(['message' => '401!'], 401);
+        }
+        elseif($e instanceof HttpException && $e->getStatusCode()== 403)
+        {
+            return response()->json(['message' => '403!'], 403);
+        }
+         elseif($e instanceof ModelNotFoundException)
+        {
+            return response()->json(['message' => 'not found'], 404);
+        }
+    
+        if ($e instanceof NotFoundHttpException) {
+            return response()->json(['message' => 'Not Found!'], 404);
+        }
+        if ($e instanceof CustomException) {
+            return response()->view('errors.custom', [], 500);
+        }
+        // // then the rest can go to a common page
+    
+            // return response()->json(['message' => 'nei vienas'], 404);
+        //  return response()->view('errors.caught-errors', [
+        //     'error' => 'Error encountered.',
+        //     'description' => 'Brief public-friendly description.'
+        // ]);
+        // if ($exception instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException)
+        //     return response(view('error.404'), 404);
+        //      return response()->json([
+        //         'success' => false,
+        //         'message' => 'Sorry, object wiannot be found'
+        //     ], 400);
+
+        if($e instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException) {
+            return response()->json(['success' => false,'message'=>'Token invalid'], 404);
+        }
+        if($e instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException) {
+            return response()->json(['success' => false,'message'=>'Token expired'], 404);
+        }
+        if($e instanceof \Tymon\JWTAuth\Exceptions\JWTException) {
+            return response()->json(['success' => false,'message'=>'No token given'], 404);
+        }
+        if($e instanceof \Illuminate\Database\QueryException) {
+            return response()->json(['success' => false,'message'=>$e->getMessage()]);
+        }
+
+
+        // return parent::render($request, $e);
     }
 }

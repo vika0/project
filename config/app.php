@@ -89,6 +89,9 @@ return [
     */
     'key' => env('APP_KEY'),
     'cipher' => 'AES-256-CBC',
+     'auth' => [
+        'jwt' => 'Dingo\Api\Auth\Provider\JWT'
+    ],
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
